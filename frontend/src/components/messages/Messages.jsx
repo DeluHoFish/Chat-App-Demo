@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 import useGetMessages from '../../hooks/useGetMessages.js';
 import MessageSkeleton from '../skeletons/MessageSkeleton.jsx';
+import useListenMessages from '../../hooks/useListenMessages.js';
 
 const Messages = () => {
   const {loading, messages} = useGetMessages();
+  useListenMessages();
   const lastMessageRef = useRef();
   
   useEffect(() => {
@@ -12,6 +14,7 @@ const Messages = () => {
       lastMessageRef.current?.scrollIntoView({behavior: "smooth"});
     }, 100);
   }, [messages]);
+
   return (
     <div className='px-4 flex-1 overflow-auto'>
       {!loading && messages.length > 0 && 
