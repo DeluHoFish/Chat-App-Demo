@@ -1,3 +1,0 @@
-1. what's createContext()
-
-2. figure out the execution time of html code and js code in files like Login.jsx and Signup.jsx
