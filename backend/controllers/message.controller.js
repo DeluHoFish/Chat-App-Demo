@@ -1,6 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
-import { getReceiverSocketId } from "../socket/socket.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
     try {
@@ -10,19 +10,19 @@ export const sendMessage = async (req, res) => {
 
         let conversation = await Conversation.findOne({
             participants: { $all: [senderId, receiverId]},
-        })
+        });
 
         if (!conversation) {
             conversation = await Conversation.create({
                 participants: [senderId, receiverId],
-            })
+            });
         }
 
         const newMessage = new Message({
             senderId,
             receiverId,
             message,
-        })
+        });
 
         if(newMessage) {
             conversation.messages.push(newMessage._id);

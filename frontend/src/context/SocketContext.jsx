@@ -17,8 +17,8 @@ export const SocketContextProvider = ({children}) => {
         if(authUser) {
             const socket = io("http://localhost:8080", {
                 query:{
-                    userId: authUser._id
-                }
+                    userId: authUser._id,
+                },
             });
             setSocket(socket);
 
